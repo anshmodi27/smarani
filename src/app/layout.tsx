@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { Toaster } from "sonner";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 export const metadata: Metadata = {
   title: "स्मरणी",
@@ -40,6 +41,7 @@ export default function RootLayout({
             storageKey="smarani-theme"
           >
             <Toaster position="bottom-right" />
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>

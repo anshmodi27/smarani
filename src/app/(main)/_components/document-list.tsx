@@ -7,7 +7,7 @@ import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import Item from "./item";
 import { cn } from "@/lib/utils";
-import { FileIcon } from "lucide-react";
+import { FilePenLine } from "lucide-react";
 
 interface DocumentListProps {
   parentDocumentId?: Id<"documents">;
@@ -66,7 +66,7 @@ const DocumentList = ({ parentDocumentId, level = 0 }: DocumentListProps) => {
           <Item
             id={document._id}
             label={document.title}
-            icon={FileIcon}
+            icon={FilePenLine}
             documentIcon={document.icon}
             active={document._id === params.documentId}
             level={level}

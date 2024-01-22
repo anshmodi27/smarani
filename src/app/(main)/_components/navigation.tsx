@@ -25,11 +25,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import TrashBox from "./trash-box";
+import { useSearch } from "../../../../hooks/use-search";
+import { useSetting } from "../../../../hooks/use-setting";
 
 const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
+  const search = useSearch();
+  const setting = useSetting();
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -139,8 +144,8 @@ const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={() => {}} />
-          <Item label="Settings" icon={Settings} onClick={() => {}} />
+          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+          <Item label="Settings" icon={Settings} onClick={setting.onOpen} />
           <Item label="New Page" icon={PlusCircle} onClick={handleCreate} />
         </div>
         <div className="mt-4">
@@ -151,10 +156,10 @@ const Navigation = () => {
               <Item label={"Trash"} icon={Trash} />
             </PopoverTrigger>
             <PopoverContent
-              className="w-60 p-1"
-              side={isMobile ? "bottom" : "right"}
+              className="w-56 p-0"
+              side={isMobile ? "bottom" : "bottom"}
             >
-              <p className="font-cabin">Trash Box</p>
+              <TrashBox />
             </PopoverContent>
           </Popover>
         </div>

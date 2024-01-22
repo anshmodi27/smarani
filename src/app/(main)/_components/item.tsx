@@ -16,6 +16,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Image from "next/image";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -27,7 +28,7 @@ interface ItemProps {
   onExpand?: () => void;
   label: String;
   onClick?: () => void;
-  icon: LucideIcon;
+  icon: LucideIcon | string;
 }
 
 const Item = ({
@@ -97,7 +98,7 @@ const Item = ({
       {!!id && (
         <div
           role="button"
-          className="h-full rounded-sm mr-1 hover:bg-neutral-300 dark:bg-neutral-600"
+          className="h-full rounded-sm mr-1 hover:bg-neutral-300 dark:hover:bg-neutral-600"
           onClick={handleExpand}
         >
           <ChevronIcon className="h-4 w-4 shrink-0" />
