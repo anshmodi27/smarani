@@ -9,9 +9,8 @@ import {
   Search,
   Settings,
   Trash,
-  Trash2,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import UserItem from "./user-item";
@@ -28,6 +27,7 @@ import {
 import TrashBox from "./trash-box";
 import { useSearch } from "../../../../hooks/use-search";
 import { useSetting } from "../../../../hooks/use-setting";
+import Navbar from "./navbar";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -35,6 +35,8 @@ const Navigation = () => {
   const create = useMutation(api.documents.create);
   const search = useSearch();
   const setting = useSetting();
+  const params = useParams();
+  const router = useRouter();
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -114,7 +116,9 @@ const Navigation = () => {
   };
 
   const handleCreate = () => {
-    const promise = create({ title: "Untitled" });
+    const promise = create({ title: "Untitled" }).then((documentId) => {
+      router.push(`/documents/${documentId}`);
+    });
     toast.promise(promise, {
       loading: "Creating...",
       success: "Note created",
@@ -127,7 +131,7 @@ const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-screen bg-secondary overflow-y-auto relative w-60 flex flex-col z-[99999] dark:bg-[#101010] font-cabin",
+          "group/sidebar h-screen bg-secondary overflow-y-auto relative w-60 flex flex-col z-[99999] dark:bg-se font-cabin",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
         )}
@@ -169,6 +173,7 @@ const Navigation = () => {
           className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
         />
       </aside>
+
       <div
         ref={navbarRef}
         className={cn(
@@ -177,15 +182,19 @@ const Navigation = () => {
           isMobile && "left-0 w-full"
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full">
-          {isCollapsed && (
-            <MenuIcon
-              onClick={resetWidth}
-              className="h-6 w-6 text-muted-foreground"
-              role="button"
-            />
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+        ) : (
+          <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapsed && (
+              <MenuIcon
+                onClick={resetWidth}
+                className="h-6 w-6 text-muted-foreground"
+                role="button"
+              />
+            )}
+          </nav>
+        )}
       </div>
     </>
   );

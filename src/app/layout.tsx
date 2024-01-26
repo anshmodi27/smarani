@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { Toaster } from "sonner";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { EdgeStoreProvider } from "../lib/edgestore";
 
 export const metadata: Metadata = {
   title: "स्मरणी",
@@ -33,17 +34,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ConvexClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="smarani-theme"
-          >
-            <Toaster position="bottom-right" />
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="smarani-theme"
+            >
+              <Toaster position="bottom-right" className="font-cabin" />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>

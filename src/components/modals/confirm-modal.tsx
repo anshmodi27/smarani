@@ -43,7 +43,7 @@ const ConfirmModal = ({ children, onConfirm }: ConfirmModelProps) => {
           </AlertDialogCancel>
           <AlertDialogAction
             onClick={handleConfirm}
-            className="bg-red-500 hover:bg-red-600"
+            className="bg-[#EF4040]/95 hover:bg-[#EF4040]"
           >
             Confirm
           </AlertDialogAction>
