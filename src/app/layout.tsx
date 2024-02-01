@@ -8,7 +8,7 @@ import { EdgeStoreProvider } from "../lib/edgestore";
 
 export const metadata: Metadata = {
   title: "स्मरणी",
-  description: "Your Notebook",
+  description: "Your Ideas, Documents, & Plans. Unified. Welcome to स्मरणी",
   icons: {
     icon: [
       {
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
