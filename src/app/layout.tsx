@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/manifest.json",
+  themeColor: [{ color: "#000" }],
 };
 
 export default function RootLayout({
