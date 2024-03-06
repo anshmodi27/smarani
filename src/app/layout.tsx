@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/manifest.json",
-  themeColor: [{ color: "#000" }],
 };
 
 export default function RootLayout({
@@ -34,6 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+      </head>
       <body>
         <ConvexClientProvider>
           <EdgeStoreProvider>

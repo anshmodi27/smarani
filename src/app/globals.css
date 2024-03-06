@@ -101,3 +101,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+body {
+  touch-action: manipulation;
+  -ms-content-zooming: none;
+  -ms-user-select: none;
+  -ms-touch-action: manipulation;
+  user-select: none;
+  touch-action: manipulation;
+  zoom: 100% !important;
+  max-height: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
